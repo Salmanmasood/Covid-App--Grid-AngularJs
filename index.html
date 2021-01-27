@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>Angular JS</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="./Scripts/Module.js"></script>
+    <script src="./Scripts/Configuration.js"></script>
+    <script src="./Scripts/Controller.js"></script>
+    <script src="./node_modules/angular-utils-pagination/dirPagination.js"></script>
+
+   
+
+
+
+
+
+</head>
+<body ng-controller="homeController">
+
+<div class="row">
+   
+  <div class="container">
+   <br/>
+   <select ng-change="getCovidData()" ng-model="country" class="form-control">
+
+         <option value="Pakistan"> Pakistan </option>
+         <option value="India">India</option>
+         <option value="USA">USA</option>
+      </select>
+
+
+</div>
+   
+</div>
+
+
+<h1 style="text-align: center;">Covid Report of {{country}}</h1>
+
+   <div class="container">
+      
+         <div class="form-group">
+            
+            <input class="form-control" type="text" ng-model="queryText" placeholder="Search">
+          </div>   
+          <h3 ng-show="queryText">Showing results for: {{queryText}}</h3>
+         <br/>
+     
+      <div class="container" ng-init="getCovidData()">
+      <table class="table table-bordered ">
+         <thead>
+            <tr>
+            <th  ng-click="sort('Country')">
+               Country
+               <span class="glyphicon sort-icon" ng-show="sortKey=='Country'" ng-class="{'glyphicon-chevron-up':sortReverse,'glyphicon-chevron-down':!sortReverse}"></span>
+           
+            </th>
+            <th ng-click="sort('Date')">
+               Date
+               <span class="glyphicon sort-icon" ng-show="sortKey=='Date'" ng-class="{'glyphicon-chevron-up':sortReverse,'glyphicon-chevron-down':!sortReverse}"></span>
+           
+            </th>
+            <th>
+               Confirmed
+            </th>
+            <th>
+               Death
+            </th>
+            <th>
+               Recovered
+            </th>
+            <th>
+               Active
+            </th>
+            
+            
+         </tr>
+         </thead>
+
+         <tbody>
+
+            <tr dir-paginate="row in data | filter: queryText | orderBy:sortKey:sortReverse | itemsPerPage: itemsPerPage" pagination-id="Date" >
+
+               <td ><span class="label label-default"></span> {{row.Country}} </span></td>
+               <td ><span class="label label-default"> {{row.Date}} </span></td>
+               <td ><span class="label label-info">{{row.Confirmed}}</span></td>
+               <td ><span class="label label-danger">{{row.Deaths}}</span></td>
+               <td ><span class="label label-success">{{row.Recovered}}</span></td>
+               <td ><span class="label label-warning">{{row.Active }}</span></td>
+ 
+
+
+            </tr>
+
+
+         </tbody>
+
+
+      </table>
+      <dir-pagination-controls pagination-id="Date" class="pull-right"></dir-pagination-controls>
+   
+      </div>
+   </div>
+    
+
+
+
+
+    
+</body>
+</html>
