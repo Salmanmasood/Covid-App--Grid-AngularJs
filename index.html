@@ -14,12 +14,23 @@
 
    
 
-
-
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    
 
 
 </head>
 <body ng-controller="homeController">
+
+   <div class="row">
+<div class="container" style="padding:10px;">
+
+   <chart title="Covid Report" xData="lineChartXData" yData="lineChartYData" xName="Month" 
+   yName="Count" subtitle="{{country}}"></chart>
+   
+</div>
+
+   </div>
+
 
 <div class="row">
    
