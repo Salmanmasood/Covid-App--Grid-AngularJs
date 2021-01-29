@@ -42,7 +42,7 @@ scope.getCovidData = function () {
        data.forEach(element => {
         var date= CovidSortService.getDate(element.Date)
     
-        element.Date=date.year+"-"+(date.month+1) + '-'+date.day;
+        element.Date=element.Date.substring(0,10);
         active.push(element.Active);
         recovered.push(element.Recovered);
         death.push(element.Deaths);
