@@ -2,32 +2,28 @@
 
 app.controller("homeController", function ($scope,$http,CovidSortService) {
     
-    scope = $scope;
-    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-    scope.country="Pakistan";  
+     scope = $scope;
+     scope.country="Pakistan";  
     scope.itemsPerPage = 50;
-     
-   scope.sortingObject={
-    sortReverse : false,
-    sortKey : 'Date',
-   }
-   scope.sortByColumns = function() {
-    scope.result = CovidSortService.sortByColumns(sortingObject);
- }
 
+  
+scope.sortingObject={sortReverse : false,sortKey : 'Date',key:'Date'}
 
+scope.sort= function(key) {
+    if(key){
+        scope.sortingObject.key=key;
+        CovidSortService.sort(scope.sortingObject);
 
-/*
-    scope.sort = function(key){
-        scope.sortReverse = (scope.sortKey == key) ? !scope.sortReverse : scope.sortReverse;
-        scope.sortKey = key;
     }
-  */ 
+}
+
+ 
+
     //service calling............................................
-let active=[],confirmed=[],death=[],recovered=[],datexAxis=[];
+
 scope.getCovidData = function () {
 
-
+    let active=[],confirmed=[],death=[],recovered=[],datexAxis=[];
     let data=[];
    
     $http({
@@ -42,34 +38,29 @@ scope.getCovidData = function () {
       
        data = response.data;
        data.forEach(element => {
-        var d=new Date(element.Date);  
-        var monthYear=months[d.getMonth()]+","+d.getFullYear();
-        element.Date=d.getDate()+","+monthYear;
+        var date= CovidSortService.getDate(element.Date)
+    
+        element.Date=element.Date.substring(0,10);
         active.push(element.Active);
         recovered.push(element.Recovered);
         death.push(element.Deaths);
         confirmed.push(element.Confirmed);
-        datexAxis.push(monthYear);
+        datexAxis.push(date.monthName+","+date.year);
         
        });
        scope.data=data;
        
     });
 
+    let dataformChart={
+        active:active,
+        confirmed:confirmed,
+        death:death,
+        recovered:recovered,
+        datexAxis:datexAxis
 
-    var gdata = {"xData": datexAxis,"yData":[{
-        "name": "Active",
-        "data": active
-    }, {
-        "name": "Confrimed",
-        "data": confirmed
-    }, {
-        "name": "Death",
-        "data": death
-    }, {
-        "name": "Recovered",
-        "data": recovered
-    }]}
+    }
+    let gdata= CovidSortService.DisplayChart(dataformChart)
     
     scope.lineChartYData=gdata.yData
     scope.lineChartXData=gdata.xData
