@@ -15,17 +15,15 @@ scope.sort= function(key) {
         CovidSortService.sort(scope.sortingObject);
 
     }
-
-
 }
 
  
 
     //service calling............................................
-let active=[],confirmed=[],death=[],recovered=[],datexAxis=[];
+
 scope.getCovidData = function () {
 
-
+    let active=[],confirmed=[],death=[],recovered=[],datexAxis=[];
     let data=[];
    
     $http({
@@ -54,20 +52,15 @@ scope.getCovidData = function () {
        
     });
 
+    let dataformChart={
+        active:active,
+        confirmed:confirmed,
+        death:death,
+        recovered:recovered,
+        datexAxis:datexAxis
 
-    var gdata = {"xData": datexAxis,"yData":[{
-        "name": "Active",
-        "data": active
-    }, {
-        "name": "Confrimed",
-        "data": confirmed
-    }, {
-        "name": "Death",
-        "data": death
-    }, {
-        "name": "Recovered",
-        "data": recovered
-    }]}
+    }
+    let gdata= CovidSortService.DisplayChart(dataformChart)
     
     scope.lineChartYData=gdata.yData
     scope.lineChartXData=gdata.xData

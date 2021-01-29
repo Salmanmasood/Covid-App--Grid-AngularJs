@@ -10,4 +10,9 @@ app.service('CovidSortService', function(CovidService) {
    }
 
 
+   this.DisplayChart = function(a) {
+      return CovidService.DisplayChart(a);
+   }
+
+
  });
