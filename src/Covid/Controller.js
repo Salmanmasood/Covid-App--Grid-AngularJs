@@ -13,12 +13,13 @@ scope.sort= function(key) {
     if(key){
         scope.sortingObject.key=key;
         CovidSortService.sort(scope.sortingObject);
-
     }
 }
 
- 
-
+let s=[];
+scope.countries=CovidSortService.getCountries(s);
+ console.log(s);
+console.log(scope.countries);
     //service calling............................................
 
 scope.getCovidData = function () {
@@ -60,7 +61,7 @@ scope.getCovidData = function () {
         datexAxis:datexAxis
 
     }
-    let gdata= CovidSortService.DisplayChart(dataformChart)
+    let gdata= CovidSortService.displayChart(dataformChart)
     
     scope.lineChartYData=gdata.yData
     scope.lineChartXData=gdata.xData

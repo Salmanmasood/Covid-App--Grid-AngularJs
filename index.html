@@ -37,8 +37,9 @@
    
   <div class="container">
    <br/>
-   <select ng-change="getCovidData()" ng-model="country" class="form-control">
-
+   <select ng-change="getCovidData()" ng-repeat="row in countries" ng-model="country" class="form-control">
+ 
+      <option value="{{row.name}}"> {{row.name}}</option>
          <option value="Pakistan"> Pakistan </option>
          <option value="India">India</option>
          <option value="USA">USA</option>

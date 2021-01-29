@@ -10,9 +10,13 @@ app.service('CovidSortService', function(CovidService) {
    }
 
 
-   this.DisplayChart = function(a) {
-      return CovidService.DisplayChart(a);
+   this.displayChart = function(a) {
+      return CovidService.displayChart(a);
    }
 
+   this.getCountries = function(a) {
+      var d=CovidService.getCountries(a)
+      return d;
+   }
 
  });
