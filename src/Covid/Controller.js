@@ -1,20 +1,28 @@
 /// <reference path="Module.js" />
-app.controller("homeController", function ($scope,$http) {
+
+app.controller("homeController", function ($scope,$http,CovidSortService) {
     
     scope = $scope;
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
     scope.country="Pakistan";  
-    scope.sortKey = 'Date';
-    scope.sortReverse = false;
     scope.itemsPerPage = 50;
      
-  
+   scope.sortingObject={
+    sortReverse : false,
+    sortKey : 'Date',
+   }
+   scope.sortByColumns = function() {
+    scope.result = CovidSortService.sortByColumns(sortingObject);
+ }
 
+
+
+/*
     scope.sort = function(key){
         scope.sortReverse = (scope.sortKey == key) ? !scope.sortReverse : scope.sortReverse;
         scope.sortKey = key;
     }
-   
+  */ 
     //service calling............................................
 let active=[],confirmed=[],death=[],recovered=[],datexAxis=[];
 scope.getCovidData = function () {
