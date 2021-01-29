@@ -1,5 +1,13 @@
 app.service('CovidSortService', function(CovidService) {
-    this.sortByColumns = function(a) {
-       return CovidService.multiply(a.key,a.sortReverse,a.sortKey);
+    
+   this.sort = function(a) {
+       return CovidService.sort(a);
     }
+
+
+    this.getDate = function(a) {
+      return CovidService.getDate(a);
+   }
+
+
  });

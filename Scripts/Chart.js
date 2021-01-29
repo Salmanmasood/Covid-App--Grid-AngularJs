@@ -1,5 +1,4 @@
-var app = angular.module('app', ['angularUtils.directives.dirPagination'])
-.directive('chart', function () {
+app.directive('chart', function () {
     return {
         restrict:'E',
         template:'<div></div>',
@@ -7,7 +6,7 @@ var app = angular.module('app', ['angularUtils.directives.dirPagination'])
         replace:true,
         scope: '=',
         link:function (scope, element, attrs) {
-            
+            console.log('oo',attrs,scope[attrs.formatter])
             var opt = {
                 chart:{
                     renderTo:element[0],
@@ -80,12 +79,12 @@ var app = angular.module('app', ['angularUtils.directives.dirPagination'])
                     series:scope[attrs.ydata]
                 });
             }, function (news) {
-                
+                console.log('ola')
 //                if (!attrs) return;
                 news = JSON.parse(news)
                 if (!news.series)return;
                 angular.extend(opt,news)
-           
+                console.log('opt.xAxis.title.text',opt)
                 
 
 
@@ -96,4 +95,3 @@ var app = angular.module('app', ['angularUtils.directives.dirPagination'])
     }
 
 })
-
