@@ -1,4 +1,4 @@
-app.factory('CovidService', function($http) {
+app.factory('CovidFactory', function($http) {
     var factory = {};
     
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -46,29 +46,7 @@ factory.getDate = function(date){
         return gdata;
     }
 
-    factory.getCountries = function(a){
-       
-        $http({
-            method: 'GET',
-            url: 'https://restcountries.eu/rest/v2/all',
-            headers: {
-                'Content-Type': 'application/json',
-                
-                // 'Authorization': AUTH_STRING_HERE
-            }
-        }).then(function (response) {
-          
-            a=response.data;
-            console.log(a);
-           
-      });
-        
-      var millisecondsToWait = 1000;
-      setTimeout(function() {
-        return a;
-      }, millisecondsToWait);
-
-    }
+  
 
 
 

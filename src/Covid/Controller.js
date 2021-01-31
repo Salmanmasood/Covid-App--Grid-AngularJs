@@ -16,10 +16,10 @@ scope.sort= function(key) {
     }
 }
 
-let s=[];
-scope.countries=CovidSortService.getCountries(s);
- console.log(s);
-console.log(scope.countries);
+
+
+
+
     //service calling............................................
 
 scope.getCovidData = function () {
@@ -73,9 +73,32 @@ scope.getCovidData = function () {
 
 }
 
+
+scope.getCountries = function(){
+    let data=[];
+     $http({
+         method: 'GET',
+         url: 'https://restcountries.eu/rest/v2/all',
+         headers: {
+             'Content-Type': 'application/json',
+             
+             // 'Authorization': AUTH_STRING_HERE
+         }
+     }).then(function (response) {
+       
+        scope.countries=response.data;
+        console.log(scope.countries);
+        
+   });
+     
+  
+     return data;
+   
+
+ }
     
 
-
+ scope. getCountries();
    
    
 });

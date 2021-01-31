@@ -1,22 +1,19 @@
-app.service('CovidSortService', function(CovidService) {
+app.service('CovidSortService', function(CovidFactory) {
     
    this.sort = function(a) {
-       return CovidService.sort(a);
+       return CovidFactory.sort(a);
     }
 
 
     this.getDate = function(a) {
-      return CovidService.getDate(a);
+      return CovidFactory.getDate(a);
    }
 
 
    this.displayChart = function(a) {
-      return CovidService.displayChart(a);
+      return CovidFactory.displayChart(a);
    }
 
-   this.getCountries = function(a) {
-      var d=CovidService.getCountries(a)
-      return d;
-   }
+   
 
  });
