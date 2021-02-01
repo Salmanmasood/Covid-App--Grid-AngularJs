@@ -1,18 +1,19 @@
-app.service('CovidSortService', function(CovidService) {
+app.service('CovidSortService', function(CovidFactory) {
     
    this.sort = function(a) {
-       return CovidService.sort(a);
+       return CovidFactory.sort(a);
     }
 
 
     this.getDate = function(a) {
-      return CovidService.getDate(a);
+      return CovidFactory.getDate(a);
    }
 
 
-   this.DisplayChart = function(a) {
-      return CovidService.DisplayChart(a);
+   this.displayChart = function(a) {
+      return CovidFactory.displayChart(a);
    }
 
+   
 
  });

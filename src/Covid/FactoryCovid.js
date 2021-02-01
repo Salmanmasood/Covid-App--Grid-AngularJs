@@ -1,4 +1,4 @@
-app.factory('CovidService', function($http) {
+app.factory('CovidFactory', function($http) {
     var factory = {};
     
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -20,13 +20,13 @@ factory.getDate = function(date){
        day:d.getDate(),
        month:d.getMonth()
     }
-    console.log(date+"------> "+completeDate);
+
     return completeDate;
  
     }
    
 
-    factory.DisplayChart = function(data){
+    factory.displayChart = function(data){
         
         var gdata = {"xData": data.datexAxis,"yData":[{
             "name": "Active",
@@ -46,6 +46,7 @@ factory.getDate = function(date){
         return gdata;
     }
 
+  
 
 
 
