@@ -5,6 +5,7 @@ app.controller("homeController", function ($scope,$http,CovidSortService) {
      scope = $scope;
      scope.country="Pakistan";  
     scope.itemsPerPage = 50;
+    scope.wrapper=true;
 
   
 scope.sortingObject={sortReverse : false,sortKey : 'Date',key:'Date'}
@@ -23,10 +24,8 @@ scope.sort= function(key) {
     //service calling............................................
 
 scope.getCovidData = function () {
-
     let active=[],confirmed=[],death=[],recovered=[],datexAxis=[];
     let data=[];
-   
     $http({
         method: 'GET',
         url: 'https://api.covid19api.com/total/country/'+ scope.country,
@@ -37,6 +36,7 @@ scope.getCovidData = function () {
         }
     }).then(function (response) {
       
+        
        data = response.data;
        data.forEach(element => {
         var date= CovidSortService.getDate(element.Date)
@@ -50,22 +50,27 @@ scope.getCovidData = function () {
         
        });
        scope.data=data;
+      
        
     });
 
-    let dataformChart={
-        active:active,
-        confirmed:confirmed,
-        death:death,
-        recovered:recovered,
-        datexAxis:datexAxis
-
-    }
-    let gdata= CovidSortService.displayChart(dataformChart)
     
-    scope.lineChartYData=gdata.yData
-    scope.lineChartXData=gdata.xData
-
+        let dataformChart={
+            active:active,
+            confirmed:confirmed,
+            death:death,
+            recovered:recovered,
+            datexAxis:datexAxis
+    
+        }
+        let gdata= CovidSortService.displayChart(dataformChart)
+        
+        scope.lineChartYData=gdata.yData
+        scope.lineChartXData=gdata.xData
+    
+        scope.wrapper=data.length>0?scope.wrapper:!scope.wrapper;
+    
+   
 
  
 

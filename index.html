@@ -20,9 +20,30 @@
 <script src="./src/Covid/ServiceCovid.js"></script>
 
 </head>
-<body ng-controller="homeController">
+<body ng-controller="homeController" ng-init="getCovidData()">
+
+
 
    <div class="row">
+   
+      <div class="container">
+       <br/>
+       <select ng-change="getCovidData()"  ng-model="country" class="form-control">
+     
+          <option ng-repeat="row in countries" value="{{row.name}}"> {{row.name}}</option>
+           
+          </select>
+    
+    
+    </div>
+    
+    </div>
+    
+
+   <div ng-hide="wrapper">
+
+   
+<div class="row">
 <div class="container" style="padding:10px;">
 
    <chart title="Covid Report" xData="lineChartXData" yData="lineChartYData" xName="Month" 
@@ -33,20 +54,6 @@
    </div>
 
 
-<div class="row">
-   
-  <div class="container">
-   <br/>
-   <select ng-change="getCovidData()"  ng-model="country" class="form-control">
- 
-      <option ng-repeat="row in countries" value="{{row.name}}"> {{row.name}}</option>
-       
-      </select>
-
-
-</div>
-   
-</div>
 
 
 <h1 style="text-align: center;">Covid Report of {{country}}</h1>
@@ -60,7 +67,7 @@
           <h3 ng-show="queryText">Showing results for: {{queryText}}</h3>
          <br/>
      
-      <div class="container" ng-init="getCovidData()">
+      <div class="container" >
       <table class="table table-bordered ">
          <thead>
             <tr>
@@ -117,8 +124,18 @@
    </div>
     
 
-
-
+   </div>
+ 
+   <div ng-show="wrapper">
+   <div class="container"> 
+<div class="col-12" style="padding-top: 20px;">
+   <div class="alert alert-danger">
+      <strong>Oops!</strong> Something went wrong, No Data Found!
+    </div>
+</div>
+</div>
+   </div>
+     
 
     
 </body>
